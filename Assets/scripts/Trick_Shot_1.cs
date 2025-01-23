@@ -8,9 +8,12 @@ public class Trick_Shot_1 : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    float speed = 0.1f;
+    float speed = 1f;
+    float direction2 = 1f;
     public AnimationCurve jump;
-    public float t = 10f;
+    public AnimationCurve spin;
+    public float t = 0f;
+ 
     void Start()
     {
         
@@ -20,12 +23,14 @@ public class Trick_Shot_1 : MonoBehaviour
     void Update()
     {
         Vector3 pos = transform.position;
+        Vector3 direction = transform.eulerAngles;
         Vector2 screenPos = Camera.main.WorldToScreenPoint(pos);
 
         if (screenPos.x < 0 || screenPos.x > Screen.width) {
 
             speed = -speed;
             print("bounced off screen");
+            direction2 = -direction2;
         
         }
 
@@ -34,15 +39,30 @@ public class Trick_Shot_1 : MonoBehaviour
 
 
             
-            pos.x += speed;
-            
-        transform.position = pos;
+            pos.x += speed*0.5f;
+            pos.y = jump.Evaluate(t);
 
-        if (Input.GetKey(KeyCode.Space))
+            transform.position = pos;
+        if (t >= 1)
         {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                
+                t = 0;
 
+
+            }
+        }
+
+        if (t < 1) {
+
+            t += 0.01f;
             print("jumped");
             transform.position = Vector3.up * jump.Evaluate(t) + pos;
+            pos.y = jump.Evaluate(t);
+            direction.z = (90 * spin.Evaluate(t) * -direction2);
+
+            transform.eulerAngles = direction;
 
         }
 
