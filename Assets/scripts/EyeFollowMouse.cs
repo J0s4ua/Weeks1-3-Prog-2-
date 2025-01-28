@@ -16,11 +16,16 @@ public class EyeFollowMouse : MonoBehaviour
         //follow mouse position
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 Pos = transform.position;
+
+        //contains the eye on the Left of the tank
+
         if (mousePos.x < -0.7) {
 
             mousePos.x = -0.7f;
         
         }
+
+        //contains the eye on the Right of the tank
 
         if (mousePos.x > 0.7)
         {
@@ -29,12 +34,16 @@ public class EyeFollowMouse : MonoBehaviour
 
         }
 
+        //contains the eye on the bottom of the tank
+
         if (mousePos.y < 0)
         {
 
             mousePos.y = 0;
 
         }
+
+        //contains the eye on the top of the tank
 
         if (mousePos.y > 2.7)
         {
