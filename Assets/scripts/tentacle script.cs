@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class tentaclescript : MonoBehaviour
+
+
 {
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +19,7 @@ public class tentaclescript : MonoBehaviour
 
 
     {
-
+        
         //makes one of the tentacles point towards the mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
